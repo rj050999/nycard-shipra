@@ -2,6 +2,9 @@
 <html>
 <head>
 <title>Surprise 🎉</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 *{
   box-sizing: border-box;
@@ -9,7 +12,7 @@
 
 body{
   margin:0;
-  font-family:Segoe UI;
+  font-family: Segoe UI;
   background:#fff;
   overflow:hidden;
   text-align:center;
@@ -35,84 +38,103 @@ h2{
   color:#ff6f91;
 }
 
+p{
+  font-size:16px;
+  line-height:1.6;
+}
+
 .photo-wrap{
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin: 20px 0;
-  flex-wrap: wrap;
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  margin: 22px 0;
+  flex-wrap:wrap;
 }
 
 .photo-wrap img{
-  width: 140px;
-  height: auto;          /* NO FIXED HEIGHT */
-  max-height: 200px;
-  object-fit: contain;
-  border-radius: 18px;
-  background: #fff;
-  padding: 8px;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  width:140px;
+  height:auto;              /* ✅ NO CROPPING */
+  object-fit:contain;
+  border-radius:18px;
+  background:#fff;
+  padding:8px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.15);
 }
 
-/* 📱 MOBILE OPTIMIZATION */
+/* 📱 MOBILE – BIG & CLEAN IMAGES */
 @media (max-width: 480px){
 
   .card{
-    margin: 40px auto;
-    padding: 22px;
+    margin:40px auto;
+    padding:22px;
   }
 
   h2{
-    font-size: 22px;
+    font-size:22px;
   }
 
   p{
-    font-size: 15px;
+    font-size:15px;
   }
 
   .photo-wrap img{
-    width: 110px;
-    max-height: 160px;   /* SAFE, NO CROPPING */
+    width:42vw;          /* 🔥 KEY FIX */
+    max-width:180px;
+    height:auto;
   }
 }
 </style>
 </head>
 
 <body>
+
 <canvas id="c"></canvas>
 
 <div class="card">
   <h2>🎁 Surprise!</h2>
+
   <p>
     You’re stuck with me  
     for all of 2026 and later too 😌💖
-
   </p>
-  <div style="font-size:36px;">🎊 🐰 💕
-<div class="photo-wrap">
-  <img src="images/pic1.jpeg" alt="memory 1">
-  <img src="images/pic2.jpeg" alt="memory 2">
-  <img src="images/pic3.jpeg" alt="memory 3">
-</div>
 
-</div>
+  <div style="font-size:36px; margin:10px 0;">🎊 🐰 💕</div>
+
+  <div class="photo-wrap">
+    <img src="images/pic1.jpeg" alt="memory 1">
+    <img src="images/pic2.jpeg" alt="memory 2">
+    <img src="images/pic3.jpeg" alt="memory 3">
+  </div>
 </div>
 
 <script>
-const c=document.getElementById("c"),x=c.getContext("2d");
-c.width=innerWidth;c.height=innerHeight;
-let p=[];
-for(let i=0;i<120;i++)
-p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:5});
+const c = document.getElementById("c"),
+      x = c.getContext("2d");
+
+c.width = innerWidth;
+c.height = innerHeight;
+
+let p = [];
+for(let i=0;i<120;i++){
+  p.push({
+    x:Math.random()*c.width,
+    y:Math.random()*c.height,
+    r:5
+  });
+}
+
 setInterval(()=>{
-x.clearRect(0,0,c.width,c.height);
-p.forEach(o=>{
-x.beginPath();
-x.arc(o.x,o.y,o.r,0,Math.PI*2);
-x.fillStyle="pink";x.fill();
-o.y+=2;if(o.y>c.height)o.y=0;
-});
+  x.clearRect(0,0,c.width,c.height);
+  p.forEach(o=>{
+    x.beginPath();
+    x.arc(o.x,o.y,o.r,0,Math.PI*2);
+    x.fillStyle="pink";
+    x.fill();
+    o.y+=2;
+    if(o.y>c.height) o.y=0;
+  });
 },30);
 </script>
+
 </body>
 </html>
